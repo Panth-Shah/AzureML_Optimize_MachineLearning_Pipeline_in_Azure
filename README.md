@@ -2,8 +2,13 @@
 
 ## Overview
 This project is part of the Udacity Azure ML Nanodegree.
-In this project, we build and optimize an Azure ML pipeline using the Python SDK and a provided Scikit-learn model.
-This model is then compared to an Azure AutoML run.
+
+As a scope of this project, we are tasked to create and optimize ML pipelineusing the Python SDK for which, a custom-coded standard [Scikit-learn Logistic Regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) model is provided. 
+Utilizing knowledge acquired throughut this course, we need to optimize Hyperparametes using **[HyperDrive](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py)** package of Azue Python SDK. Result of this method needs to be compared with a model built and optimized using **[Azure AutoML](https://azure.microsoft.com/en-ca/services/machine-learning/automatedml/)** on the same dataset.
+
+###Project Workflow Steps:
+![Alt Text](https://github.com/Panth-Shah/AzureML_Optimize_MachineLearning_Pipeline_in_Azure/blob/master/Run_Results/creating-and-optimizing-an-ml-pipeline.png)
+*source: Machine Learning Engineer with Microsoft Azure Nanodegree Program by Udactiy*
 
 ## Summary
 **In 1-2 sentences, explain the problem statement: e.g "This dataset contains data about... we seek to predict..."**

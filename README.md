@@ -28,4 +28,10 @@ This model is then compared to an Azure AutoML run.
 
 ## Proof of cluster clean up
 **If you did not delete your compute cluster in the code, please complete this section. Otherwise, delete this section.**
-**Image of cluster marked for deletion**
+Following command is executed to delete compute cluster created
+
+```
+cpu_cluster.delete()
+```
+
+![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/DeleteCluster.JPG)

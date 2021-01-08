@@ -3,7 +3,7 @@
 ## Overview
 This project is part of the Udacity Azure ML Nanodegree.
 
-As a scope of this project, we are tasked to create and optimize ML pipelineusing the Python SDK for which, a custom-coded standard [Scikit-learn Logistic Regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) model is provided.<br/>Utilizing knowledge acquired through this course, we need to optimize Hyperparametes using **[HyperDrive](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py)** package of Azue Python SDK. Result of this method needs to be compared with a model built and optimized using **[Azure AutoML](https://azure.microsoft.com/en-ca/services/machine-learning/automatedml/)** on the same dataset.
+As a scope of this project, we are tasked to create and optimize ML pipelineusing the Python SDK for which, a custom-coded standard **[Scikit-learn Logistic Regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)** model is provided.<br/>Utilizing knowledge acquired through this course, we need to optimize Hyperparametes using **[HyperDrive](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py)** package of Azue Python SDK. Result of this method needs to be compared with a model built and optimized using **[Azure AutoML](https://azure.microsoft.com/en-ca/services/machine-learning/automatedml/)** on the same dataset.
 
 ### Project Workflow Steps:
 ![Alt Text](https://github.com/Panth-Shah/AzureML_Optimize_MachineLearning_Pipeline_in_Azure/blob/master/Run_Results/creating-and-optimizing-an-ml-pipeline.png)
@@ -18,10 +18,10 @@ In this project, we are using the [UCI Bank Marketing](https://archive.ics.uci.e
 ### Input variables:
 
 Bank Client Data:<br/>
-1 - `age` (numeric)<br/>
-2 - `job` : type of job (categorical: 'admin.','blue-collar','entrepreneur','housemaid','management','retired','self-employed','services','student','technician','unemployed','unknown')<br/>
-3 - `marital` : marital status (categorical: 'divorced','married','single','unknown'; note: 'divorced' means divorced or widowed)<br/>
-4 - `education` (categorical: 'basic.4y','basic.6y','basic.9y','high.school','illiterate','professional.course','university.degree','unknown')<br/>
+1 - `age`: (numeric)<br/>
+2 - `job`: type of job (categorical:    'admin.','blue-collar','entrepreneur','housemaid','management','retired','self-employed','services','student','technician','unemployed','unknown')<br/>
+3 - `marital`: marital status (categorical: 'divorced','married','single','unknown'; note: 'divorced' means divorced or widowed)<br/>
+4 - `education`: (categorical: 'basic.4y','basic.6y','basic.9y','high.school','illiterate','professional.course','university.degree','unknown')<br/>
 5 - `default`: has credit in default? (categorical: 'no','yes','unknown')<br/>
 6 - `housing`: has housing loan? (categorical: 'no','yes','unknown')<br/>
 7 - `loan`: has personal loan? (categorical: 'no','yes','unknown')<br/>

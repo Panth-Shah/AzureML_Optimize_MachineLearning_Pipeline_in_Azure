@@ -55,16 +55,56 @@ Social and Economic Context Attributes:<br/>
 
 21 - `y`: has the client subscribed a term deposit? (binary: 'yes','no')
 
-***Dataset Source**: [Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, Elsevier, 62:22-31, June 2014*
-
-### Solution Explanation:
+### Solution Result Explanation:
 
 - For Scikit-learn Logistic Regression model, **90.83%** accuracy was achived after tuning hyperparameters with the help of `HyperDrive` package.
 
 - Using `Automated ML` for the same dataset, **91.68%** accuracy was achived with best performing model being `Voting Ensemble`.
 
+***Dataset Source**: [Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, Elsevier, 62:22-31, June 2014*
 
 ## Scikit-learn Pipeline
+
+### Pipeline Architecture
+
+- Initialize Workspace and Create an Experiment:
+
+	This step will initialize an existing workspace object using `get` method of `Workspace` class.
+	New experiment is created to track all the runs in this workspace for Scikit-learn Logistic Regression model.
+	
+- Create AmlCompute:
+
+	A compute target (Azure ML managed compute) is created to train ML model. Type of Compute Cluster is created based on configuration (`vm_size`, `max_node`) prvided.
+	
+- Prepare training script to train classification model:
+
+	For this project, training script `train.py` was already provided. Script includes
+	- Load data from csv file by creating TabularDataset using `TabularDatasetFactory`
+	- Perform data pre-preprocessing(clean up & transformation) task
+	- Split data into train and test sets 
+	- Calling `sklearn.linear_model.LogisticRegression` providing Inverse of regularization strength (`C`) & Maximum number of iterations (`max_itr`) hyperparameters.
+	
+- Configure Training Run:
+
+	Using `ScriptRunConfig` package, job-specific information such as training script `train.py`, target environment, and compute resources to use are configured to submit with the training job.
+
+- Hyperparameter Tuning:
+
+	`HyperDriveConfig` object is created to use for this purpose, which includes information about hyperparameter space sampling, termination policy, primary metric, estimator, run config, maximum number of concurrent runs, maximum total number of runs to create and maximum duration of the HyperDrive run.
+	
+- Submit and Monitor Hyperparameter Tuning job:
+
+	We will submit the hyperdrive run to the experiment created for SKlearn model training purpose.<br/> 
+	To monitor progress of model training including properties, logs, and metrics from Jupyter notebook, we will use AzureML widget `RunDetails`.
+	
+- Capture Best Run for HyperDrive:
+
+	Using `get_best_run_by_primary_metric` method of HyperDriveRun class, we will capture best performing run amongst all child runs. This is identified based on primary metric parameter (`Accuracy`) specified in the HyperDriveConfig.
+	
+- Register and Save Best Model for HyperDrive:
+
+	Upon identifying best performing run having highest accuracy, we can register this model under the workspace for deployment using `register_model` method or save into local repository using `download_file` of AzureML core Run class.
+	
 **Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
 **What are the benefits of the parameter sampler you chose?**

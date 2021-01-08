@@ -13,7 +13,13 @@ As a scope of this project, we are tasked to create and optimize ML pipelineusin
 
 ### Problem Statement
 
-In this project, we are using the [UCI Bank Marketing](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing) dataset to build and optimize ML model for a classification problem. The classification goal is to predict if the client will subscribe to a tem deposite with the bank.
+In this project, we demonstate how to tain a logistic regression model using Azue ML Python SDK with Scikit-learn to perform classification on the [UCI Bank Marketing](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing) dataset. The classification goal is to predict if the client will subscribe to a term deposite or not with the bank.
+
+Next step would be to further improve the accuracy by automating optimization process our model's hyperparameters `C` and `max-itr` using Azure Machine Learning's hyperparameter tuning package HyperDrive.
+
+There may be a better Machine Learning algoithm to use for this application, which will be determined using Azure ML's Automated ML feature, which will simplify model building pocess and will create a high quality trained model using provided dataset.
+
+Final result will be determined comparing performance metrics of models obtained from both the approaches.
 
 ### Input variables:
 
@@ -51,7 +57,12 @@ Social and Economic Context Attributes:<br/>
 
 ***Dataset Source**: [Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, Elsevier, 62:22-31, June 2014*
 
-**In 1-2 sentences, explain the solution: e.g. "The best performing model was a ..."**
+### Solution Explanation:
+
+- For Scikit-learn Logistic Regression model, **90.83%** accuracy was achived after tuning hyperparameters with the help of `HyperDrive` package.
+
+- Using `Automated ML` for the same dataset, **91.68%** accuracy was achived with best performing model being `Voting Ensemble`.
+
 
 ## Scikit-learn Pipeline
 **Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**

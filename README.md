@@ -65,18 +65,18 @@ Social and Economic Context Attributes:<br/>
 
 ## Scikit-learn Pipeline
 
-### Pipeline Architecture
+### Pipeline Architecture:
 
-- Initialize Workspace and Create an Experiment:
+- **Initialize Workspace and Create an Experiment:**
 
-	This step will initialize an existing workspace object using `get` method of `Workspace` class.
+	This step will initialize an existing workspace object using `get()` method of `Workspace` class.
 	New experiment is created to track all the runs in this workspace for Scikit-learn Logistic Regression model.
 	
-- Create AmlCompute:
+- **Create AmlCompute:**
 
 	A compute target (Azure ML managed compute) is created to train ML model. Type of Compute Cluster is created based on configuration (`vm_size`, `max_node`) prvided.
 	
-- Prepare training script to train classification model:
+- **Prepare training script to train classification model:**
 
 	For this project, training script `train.py` was already provided. Script includes
 	- Load data from csv file by creating TabularDataset using `TabularDatasetFactory`
@@ -84,32 +84,38 @@ Social and Economic Context Attributes:<br/>
 	- Split data into train and test sets 
 	- Calling `sklearn.linear_model.LogisticRegression` providing Inverse of regularization strength (`C`) & Maximum number of iterations (`max_itr`) hyperparameters.
 	
-- Configure Training Run:
+- **Configure Training Run:**
 
 	Using `ScriptRunConfig` package, job-specific information such as training script `train.py`, target environment, and compute resources to use are configured to submit with the training job.
 
-- Hyperparameter Tuning:
+- **Hyperparameter Tuning:**
 
 	`HyperDriveConfig` object is created to use for this purpose, which includes information about hyperparameter space sampling, termination policy, primary metric, estimator, run config, maximum number of concurrent runs, maximum total number of runs to create and maximum duration of the HyperDrive run.
 	
-- Submit and Monitor Hyperparameter Tuning job:
+- **Submit and Monitor Hyperparameter Tuning job:**
 
 	We will submit the hyperdrive run to the experiment created for SKlearn model training purpose.<br/> 
 	To monitor progress of model training including properties, logs, and metrics from Jupyter notebook, we will use AzureML widget `RunDetails`.
 	
-- Capture Best Run for HyperDrive:
+- **Capture Best Run for HyperDrive:**
 
-	Using `get_best_run_by_primary_metric` method of HyperDriveRun class, we will capture best performing run amongst all child runs. This is identified based on primary metric parameter (`Accuracy`) specified in the HyperDriveConfig.
+	Using `get_best_run_by_primary_metric()` method of HyperDriveRun class, we will capture best performing run amongst all child runs. This is identified based on primary metric parameter (`Accuracy`) specified in the HyperDriveConfig.
 	
-- Register and Save Best Model for HyperDrive:
+- **Register and Save Best Model for HyperDrive:**
 
-	Upon identifying best performing run having highest accuracy, we can register this model under the workspace for deployment using `register_model` method or save into local repository using `download_file` of AzureML core Run class.
+	Upon identifying best performing run having highest accuracy, we can register this model under the workspace for deployment using `register_model()` method or save into local repository using `download_file()` of AzureML core Run class.
 	
 **Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
-**What are the benefits of the parameter sampler you chose?**
+## Sampling the Hyperparameter Space:
 
-**What are the benefits of the early stopping policy you chose?**
+To define random sampling over the search space of hyperparameter we are trying to optimize, we are using AzureML's `RandomParameterSampling` class. Levaraging this method of parameter sampling, users can randomly select hyperparameter from defined search space. With this sampling algorithm, AzureML lets users choose hyperparameter values from a set of discrete values or a distribution over a continuous range. This method also supports early termination of low performance runs, which is a cost effcient approach when training model on aml compute cluster.
+
+Other two approaches supported by AzureML are Grid Sampling and Bayesian Sampling: 
+	- As `Grid Sampling` only supports discrete hypeparameter, it searches over all the possibilities from defined search space. And so more compute resource is required, which is not very budget efficient fo this project. 
+	- `Bayesian Sampling` method is based on Bayesian optimization algorithm and picks samples based on how previous samples performed to improve the primary metric of new samples. Because of that, more number of runs benefit future selection of samples, which also is not a very cost efficient solution for this project. 
+
+## What are the benefits of the early stopping policy you chose?**
 
 ## AutoML
 **In 1-2 sentences, describe the model and hyperparameters generated by AutoML.**

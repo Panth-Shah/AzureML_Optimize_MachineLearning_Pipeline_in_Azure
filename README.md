@@ -7,7 +7,10 @@ As a scope of this project, we are tasked to create and optimize ML pipelineusin
 
 ### Project Workflow Steps:
 ![Alt Text](https://github.com/Panth-Shah/AzureML_Optimize_MachineLearning_Pipeline_in_Azure/blob/master/Run_Results/creating-and-optimizing-an-ml-pipeline.png)
-*Source: Machine Learning Engineer with Microsoft Azure Nanodegree Program by Udactiy*
+
+Figure 1: Steps to perform to create and optimize ML pipeline
+
+***Source**: Machine Learning Engineer with Microsoft Azure Nanodegree Program by Udactiy*
 
 ## Summary
 
@@ -105,20 +108,55 @@ Social and Economic Context Attributes:<br/>
 
 	Upon identifying best performing run having highest accuracy, we can register this model under the workspace for deployment using `register_model()` method or save into local repository using `download_file()` of AzureML core Run class.
 	
-**Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
-
-## Sampling the Hyperparameter Space:
+### Sampling the Hyperparameter Space:
 
 To define random sampling over the search space of hyperparameter we are trying to optimize, we are using AzureML's `RandomParameterSampling` class. Levaraging this method of parameter sampling, users can randomly select hyperparameter from defined search space. With this sampling algorithm, AzureML lets users choose hyperparameter values from a set of discrete values or a distribution over a continuous range. This method also supports early termination of low performance runs, which is a cost effcient approach when training model on aml compute cluster.
 
-Other two approaches supported by AzureML are Grid Sampling and Bayesian Sampling: 
-	- As `Grid Sampling` only supports discrete hypeparameter, it searches over all the possibilities from defined search space. And so more compute resource is required, which is not very budget efficient fo this project. 
-	- `Bayesian Sampling` method is based on Bayesian optimization algorithm and picks samples based on how previous samples performed to improve the primary metric of new samples. Because of that, more number of runs benefit future selection of samples, which also is not a very cost efficient solution for this project. 
+Other two approaches supported by AzureML are Grid Sampling and Bayesian Sampling:
 
-## What are the benefits of the early stopping policy you chose?**
+	As `Grid Sampling` only supports discrete hypeparameter, it searches over all the possibilities from defined search space. And so more compute resource is required, which is not very budget efficient fo this project. 
+	`Bayesian Sampling` method is based on Bayesian optimization algorithm and picks samples based on how previous samples performed to improve the primary metric of new samples. Because of that, more number of runs benefit future selection of samples, which also is not a very cost efficient solution for this project. 
+
+### Advantages of Early Stopping Policy:
+
+While working with Azure's managed aml compute cluster to train classification model for this project, it is important to maintain and imporve computational effciency.Specifying early termination policy autometically terminates poorly performing runs based on configuration parameters (`evaluation_interval`, `delay_evaluation`) provided upon defining these policies. These can be applied to HyperDrive runs and run is cancelled when the criteria of a specified policy are met.
+
+`Bendit Policy`:
+
+Among supported early termination policies by Azure ML, we are using Bendit Policy in this project. This policy is based on slack criteria, and a frequency and delay interval for evaluation. BenditPolicy determines best performing run based on selected primary metric (Accuracy for this project) and sets it as a benchmark to compare it against other runs. `slack_factor`/`slack_amount` configuration parameter is used to specify slack allowed with respect to best performing run. `evaluation_interval` specifies frequency of applying policy and `delay_evaluation` specifies number of intervals to delay policy evaluation for run termination. This parameter ensures protection against premature termination of training run.
+
+Other termination policies supported by Azure ML are `Median Stopping Policy`, `Truncation Selection Policy` & `No Termination Policy`.
+
+![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/Hyperdrive_AzureStudio_Run.JPG)
+
+Figure 2. Azure ML Studio Experiment submitted with HyperDrive from notebook 
+
+![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/Hyperdrive_NotebookRun_Accuracy_Plot.JPG)
+
+Figure 3. Plot displaying `Accuracy` obtained from all the child runs in an experiment
+
+![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/Hyperdrive_NotebookRun_Parameter_Plot.JPG)
+
+Figure 4. Plot displaying `C` and `max-itr` hyperparmeter values selected for all the child runs in an experiment
 
 ## AutoML
 **In 1-2 sentences, describe the model and hyperparameters generated by AutoML.**
+Azure Automated Machine Learning (AutoML) prvides capabilities automate iterative task of machine learning model development. In this project, we are using Azure AutoML to train and tune a Machine Learning model to solve classification problem using UCI Bank Marketing dataset with the goal to predict if the client will subscribe to a term deposite with the bank.
+
+`AutoMLConfig:`
+
+This class from Azure ML Python SDK represents configuration to submit an automated ML experiment in Azure ML. Configuration parameters used for this project includes
+- `experiment_timeout_minutes`: 30 
+- `task`: classification 
+- `primary_metric`: accuracy
+- `training_data`: Tabular dataset created from csv data file using TabularDatasetFactory
+- `compute_target`: aml-compute cluster
+- `label_column`: y(target)
+- `n_cross_validations`: 5
+
+Best Performing Model and Hyperparameters generated by AutoML:
+
+Among all the models trained by AutoML, `Voting Ensemble` outperformed all the other models with **91.68% accuracy**.
 
 ## Pipeline comparison
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**

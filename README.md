@@ -378,8 +378,17 @@ Figure 4. Plot displaying `C` and `max-itr` hyperparmeter values selected for al
 	 'warm_start': False}
 
 ## Pipeline comparison
-**Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
 
+In this project, we trained **Logistic Regression** model using Azure ML's HyperDrive feature for random sampling search space for hyperparameter tuning and achieved `90.83%` accuracy.
+
+In our second approach, we trained classification model for given dataset using Azure ML's Automated ML feature which was configured to time out after 30 minutes. With this approach, `Voting Ensemble` model has proven best performing with `91.70%`accuracy.
+
+### Architectural Difference:
+
+Logistic Regression is a simple algorithm and easily interpretable. Hyperparameter tuning process used with this project allows us to randomize parameter sampling process, but limitation in number of total runs and number of concurrent runs allowed considering expensive compute resource consumption, we are limited to not explore more discrete values for larger search space and check more permutations of hyperparameters to to find better performing model. 
+
+Whereas, AutomatedML is capable of producing ensemble models which combines results ffrom multiple iterations in a single run to produce better prediction results. However, due to max time limit to run AutoML, accuracy achieved is not significantly higher. With AutomatedML, we don't have to worry about hyperparameter tuning as it autometically does that based on AutoML configuration and so optimum combination of hyperparameters can be obtained.
+ 
 ## Future work
 
 - According to Azure AutoML's Data Guardrails analysis, **class immbalance** is detected in the provided dataset for this project. Here, class distribution of sample space in the training dataset is severly disproportionated with non-subscription to subscription instance is 89:11. Because input data has a bias towards one class, this can lead to a falsely perceived positive effect of a model's accuracy.

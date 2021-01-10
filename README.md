@@ -169,15 +169,19 @@ Figure 5. Azure ML Studio - AutoML experiment completed
 
 ![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/AutoML_Studio_Experiment_Models.JPG)
 
-Figure 6. Trained models by AutoML in multiple iterations
+Figure 6. Azure ML Studio - Performance Metrics of best performing model trained by AutoML
 
 ![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/AutoML_Notebook_Results.JPG)
 
-Figure 7. Azure ML Studio - Performance Metrics of best performing model trained by AutoML
+Figure 7. PythonSDK AzureML Widget - Trained models by AutoML in multiple iterations
 
 ![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/AutoML_Studio_Accuracy_Metrics.JPG)
 
-Figure 7. Accuracy plot for trained models in multiple iterations using AutoML
+Figure 8. Accuracy plot for trained models in multiple iterations using AutoML
+
+![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/Notebook_AutoML_Accuracy_Plot.JPG)
+
+Figure 9. PythonSDK AzureML Widget - Accuracy plot for multiple iterations using AutoML
 	
 ### Hyperparameters generated for models ensembled in Voting Ensemble:
 

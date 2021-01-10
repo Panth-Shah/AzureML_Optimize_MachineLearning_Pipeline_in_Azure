@@ -162,7 +162,18 @@ Among all the models trained by AutoML, `Voting Ensemble` outperformed all the o
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
 
 ## Future work
-**What are some areas of improvement for future experiments? Why might these improvements help the model?**
+
+- According to Azure AutoML's Data Guardrails analysis, **class immbalance** is detected in the provided dataset for this project. Here, class distribution of sample space in the training dataset is severly disproportionated with non-subscription to subscription instance is 89:11. Because input data has a bias towards one class, this can lead to a falsely perceived positive effect of a model's accuracy.
+To improve accuracy of the prediction model, will use synthetic sampling techniques like SMOTE, MSMOTE and other ensemble techniques to increase the frequency of the minority class or decrease the frequncy of the majority class.
+
+- Avoiding misleading data in order to imporve the performance of our prediction model is a critical step as irrelevant attributes in your dataset can result into overfitting. As a future enhancement of this project, leveraging **Automated ML's Model Interpretability** dashboard, will inspect which dataset feature is essential and used by model to make its predictions and determine best and worst performing features to include/exclude them from future runs. Based on this finding, will customize featurization settings used by Azure AutoML to train our model. `FeaturizationConfig` defines feature engineering configuration for our automated ML experiment, using which we will exclude irrelevent features identified from AutoML's model interpretability dashboard. While training SKLearn Logistic Regression classification model, **[Recursive Feature Elimination](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.RFE.html)** can also be used to rank the feature and recursively reducing the sets of features.
+
+- With current project, we are using only two hyperparameters `C` and `max-itr` to train Logistic Regression model. Adding additional parameters like `penalty`, `class_weight`, `intercept_scaling`, `n_jobs`, `l1_ratio` etc. will allow us to control training model and performance of our classifier can be improvised. 
+
+- Due to class imbalance problem we have with the given data set, it is possible that model will always only predict class which has higher % instances in the dataset. This results into excellent classification accuracy as it only reflects the underlying class distribution. This situation is called **Accuracy Paradox**, where accuracy is not the best metric to use for performance evaluation of prediction model and can be misleading. As a future improvements of this model, will use additional measures such as **Precision, Recall, F1 Score** etc. to evaluate a trained classifier.
+
+- With more compute resources in hand for future experiments, will perform parameter sampling over the search space of hyperparameter for **HyperDriveConfig** using **Bayesian Sampling** technique. To obtain better results, will go with Azure ML's recommended approach by maximizing number of runs greater than or equal to 20 times the number of hyperparameters being tuned using this sampling technique. Will also keep number of concurrent runs lower, which will lead us to better sampling convergence, since the smaller degree of parallelism increases the number of runs that benefit parameter tuning process by taking reference from previously completed runs.
+
 
 ## Proof of cluster clean up
 **If you did not delete your compute cluster in the code, please complete this section. Otherwise, delete this section.**

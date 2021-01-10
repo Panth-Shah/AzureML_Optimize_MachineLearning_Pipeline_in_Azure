@@ -6,7 +6,7 @@ This project is part of the Udacity Azure ML Nanodegree.
 As a scope of this project, we are tasked to create and optimize ML pipelineusing the Python SDK for which, a custom-coded standard **[Scikit-learn Logistic Regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)** model is provided.<br/>Utilizing knowledge acquired through this course, we need to optimize Hyperparametes using **[HyperDrive](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py)** package of Azue Python SDK. Result of this method needs to be compared with a model built and optimized using **[Azure AutoML](https://azure.microsoft.com/en-ca/services/machine-learning/automatedml/)** on the same dataset.
 
 ### Project Workflow Steps:
-![Alt Text](https://github.com/Panth-Shah/AzureML_Optimize_MachineLearning_Pipeline_in_Azure/blob/master/Run_Results/creating-and-optimizing-an-ml-pipeline.png)
+![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/creating-and-optimizing-an-ml-pipeline.png)
 
 Figure 1: Steps to perform to create and optimize ML pipeline
 
@@ -161,7 +161,19 @@ Figure 4. Plot displaying `C` and `max-itr` hyperparmeter values selected for al
 	- Ensemble models in Automated ML are combination of multiple iterations which may provide better predictions compared to a single iteration and appear as the final iterations of run.
 	- Two types of ensemble methods for combining models: **Voting** and **Stacking**
 	- Voting ensemble model predicts based on the weighted average of predicted class probabilities.
-	- In our project, combined models by Voting ensemble with their selected hyperparameters are as follows. 
+	- In our project, combined models by Voting ensemble with their selected hyperparameters are as follows.
+
+![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/AutoML_Studio_Experiment_Completed.JPG)
+
+Figure 5. Azure ML Studio - AutoML experiment completed
+
+![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/AutoML_Studio_Experiment_Models.JPG)
+
+Figure 6. Azure ML Studio - Trained models by AutoML in multiple iterations
+
+![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/AutoML_Studio_Accuracy_Metrics.JPG)
+
+Figure 7. Azure ML Studio - Performance Metrics of best performing model trained by AutoML
 	
 ### Hyperparameters generated for models ensembled in Voting Ensemble:
 
@@ -375,8 +387,9 @@ Figure 4. Plot displaying `C` and `max-itr` hyperparmeter values selected for al
 	 'oob_score': False,
 	 'random_state': None,
 	 'verbose': 0,
-	 'warm_start': False}
-
+	 'warm_start': False
+	}
+	
 ## Pipeline comparison
 
 In this project, we trained **Logistic Regression** model using Azure ML's HyperDrive feature for random sampling search space for hyperparameter tuning and achieved `90.83%` accuracy.

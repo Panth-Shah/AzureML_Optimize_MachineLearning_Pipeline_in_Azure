@@ -438,3 +438,16 @@ cpu_cluster.delete()
 ```
 
 ![Alt Text](https://github.com/Panth-Shah/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/Run_Results/DeleteCluster.JPG)
+
+## References:
+
+<a id="1">[1]</a> 
+https://docs.microsoft.com/en-us/azure/machine-learning/<br/>
+<a id="2">[2]</a>
+https://www.analyticsvidhya.com/blog/2017/03/imbalanced-data-classification/<br/>
+<a id="3">[3]</a>
+https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml<br/>
+<a id="4">[4]</a>
+https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8<br/>
+<a id="5">[5]</a>
+https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html<br/>

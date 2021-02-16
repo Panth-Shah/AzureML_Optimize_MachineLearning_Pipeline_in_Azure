@@ -185,6 +185,9 @@ Figure 9. PythonSDK AzureML Widget - Accuracy plot for multiple iterations using
 	
 ### Hyperparameters generated for models ensembled in Voting Ensemble:
 
+<details>
+  <summary>Click to expand!</summary>
+	
 	prefittedsoftvotingclassifier
 	{'estimators': ['0', '1', '18', '17', '23', '4', '21'],
 	 'weights': [0.2,
@@ -397,6 +400,7 @@ Figure 9. PythonSDK AzureML Widget - Accuracy plot for multiple iterations using
 	 'verbose': 0,
 	 'warm_start': False
 	}
+</details>
 	
 ## Pipeline comparison
 
